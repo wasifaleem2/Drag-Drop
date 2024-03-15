@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Selection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h3>Team Selection</h3>
+    <div class="main">
+        <div id="target" class="container" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
+            <script>
+                let players = [
+                    "Babar Azam",
+                    "Shadab Khan",
+                    "Asif Ali",
+                    "Haider Ali",
+                    "Haris Rauf",
+                    "Iftikhar Ahmed",
+                    "Khushdil Shah",
+                    "Mohammad Hasnain",
+                    "Mohammad Nawaz",
+                    "Mohammad Rizwan",
+                    "Mohammad Wasim",
+                    "Naseem Shah",
+                    "Shaheen Shah Afridi",
+                    "Shan Masood",
+                    "Usman Qadir",
+                    "Abdullah Shafique",
+                    "Fakhar Zaman",
+                    "Imam-ul-Haq",
+                    "Saud Shakeel",
+                    "Agha Salman"
+                ];
+                for (let i = 0; i < players.length; i++) {
+                    document.write(`<div id="p${i}" class="element" draggable="true" ondragstart="dragstart_handler(event)">
+                        ${players[i]}
+                    </div>`);
+                }
+            </script>
+        </div>
+        <div id="target" class="container" ondrop="drop_handler(event)" ondragover="dragover_handler(event)"></div>
+    </div>
+</body>
+<script>
+    function dragstart_handler(ev) {
+        // Add the target element's id to the data transfer object
+        ev.dataTransfer.setData("application/my-app", ev.target.id);
+        ev.dataTransfer.effectAllowed = "move";
+        console.log("ev", ev)
+        console.log("ev.target.id", ev.target.id)
+    }
+    function dragover_handler(ev) {
+        ev.preventDefault();
+        ev.dataTransfer.dropEffect = "move";
+        // console.log("ev.dataTransfer", ev.dataTransfer)
+    }
+    function drop_handler(ev) {
+        ev.preventDefault();
+        // Get the id of the target and add the moved element to the target's DOM
+        const data = ev.dataTransfer.getData("application/my-app");
+        console.log("data", data)
+        ev.target.appendChild(document.getElementById(data));
+        console.log("ev new", ev)
+    }
+</script>
+
+</html>
